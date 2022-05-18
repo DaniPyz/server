@@ -8,8 +8,9 @@ module.exports = function (app) {
     );
     next();
   });
-  app.post("/api/postTopic", );
-
+  app.post("/api/postTopic",);
+  
+  app.get("/api/test/user", [authJwt.verifyToken], controller.getPosts);
 
 
   app.get("/api/test/all", controller.allAccess);

@@ -22,6 +22,7 @@ app.use(
 
 const db = require("./Models");
 const Role = db.role;
+const Topic = db.topic;
 require('./routes/Auth')(app);
 require('./routes/User')(app);
 function initial() {
@@ -63,9 +64,9 @@ db.mongoose.connect('mongodb://localhost/history', {
 
 app.get('/getAll',async (req, res) => {
   const result = await Topic.find()
-  console.log(result)
   res.send(result);
 });
+
 app.post('/postTopic',async (req, res) => {
   const Post = new Topic(req.body);
   const created = await Post.save();

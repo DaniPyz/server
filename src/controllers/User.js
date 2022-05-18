@@ -10,3 +10,11 @@ exports.adminBoard = (req, res) => {
 exports.moderatorBoard = (req, res) => {
   res.status(200).send("Moderator Content.");
 };
+
+
+
+
+exports.getPosts = async (req, res) => {
+  const result = await Topic.find()
+  res.send(result);
+};
