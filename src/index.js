@@ -62,7 +62,7 @@ function initial() {
 }
 initial()
 
-db.mongoose.connect('mongodb://localhost/history', {
+db.mongoose.connect('mongodb+srv://Dapy:Dapy@cluster0.gxfy42y.mongodb.net/?retryWrites=true&w=majority', {
   useUnifiedTopology: true,
   useNewUrlParser: true,
 })
