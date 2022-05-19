@@ -3,20 +3,25 @@ const express = require('express');
 const cookieSession = require("cookie-session");
 const cors = require('cors');
 // const Topic = require('../src/Models/Topic')
-
+const cookieParser = require('cookie-parser')
 const { default: mongoose } = require('mongoose');
 const app = express();
 
 const port = 3001;
 
 app.use(express.json());
-app.use(cors())
+app.use(cors({
+  credentials: true,
+  origin: ['https://server-dapy.vercel.app']
+}
+))
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser())
 app.use(
   cookieSession({
     name: "dapy-session",
     secret: "Dapy2022",
-    httpOnly: true
+    httpOnly: false
   })
 );
 

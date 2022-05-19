@@ -8,13 +8,16 @@ module.exports = function (app) {
     );
     next();
   });
-  app.post("/api/postTopic",);
   
   app.get("/api/test/user", [authJwt.verifyToken], controller.getPosts);
-
+  app.post(
+    "/api/postTopic",
+    [authJwt.verifyToken, authJwt.isModerator],
+    controller.postPost
+  );
 
   app.get("/api/test/all", controller.allAccess);
-  app.get("/api/test/user", [authJwt.verifyToken], controller.userBoard);
+  // app.get("/api/test/user", [authJwt.verifyToken], controller.userBoard);
   app.get(
     "/api/test/mod",
     [authJwt.verifyToken, authJwt.isModerator],

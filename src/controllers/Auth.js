@@ -52,6 +52,31 @@ exports.signup = (req, res) => {
     }
   });
 };
+exports.verifySignin =  (req, res) => {
+  let token = req.session.token;
+  jwt.verify(token, "&D&d67d76D&sdSdSdD23123JFuLI8g", async (err, decoded) => {
+    if (err) {
+      return res.status(401).send({ message: "No user with this token!" });
+    }
+    const user = await User.findOne({ _id: decoded.id })
+    const rolesIds = user.roles
+ 
+  
+
+
+
+    res.status(200).send({
+      id: user._id,
+      username: user.username,
+      email: user.email,
+      roles: user.roles,
+    });
+  })
+}
+
+
+
+
 exports.signin = (req, res) => {
   User.findOne({
     username: req.body.username,
@@ -80,6 +105,7 @@ exports.signin = (req, res) => {
         authorities.push("ROLE_" + user.roles[i].name.toUpperCase());
       }
       req.session.token = token;
+      console.log(authorities)
       res.status(200).send({
         id: user._id,
         username: user.username,

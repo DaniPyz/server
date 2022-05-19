@@ -11,7 +11,26 @@ verifyToken = (req, res, next) => {
     if (err) {
       return res.status(401).send({ message: "Unauthorized!" });
     }
+    
     req.userId = decoded.id;
+   
+    next();
+  });
+};
+verifyAndReturnUserByToken = (req, res, next) => {
+  let token = req.session.token;
+  if (!token) {
+    return res.status(403).send({ message: "No token provided!" });
+  }
+  jwt.verify(token, "&D&d67d76D&sdSdSdD23123JFuLI8g", (err, decoded) => {
+    if (err) {
+      return res.status(401).send({ message: "No user with this token!" });
+    }
+    const user = User.findById('decoded.id')
+    req.userId = decoded.id;
+    return{ 
+      user
+    }
     next();
   });
 };
